@@ -5,46 +5,54 @@
 
 ?>
 
-    <div id="main-banner">
-        <h1>Faça seu pedido</h1>
-    </div>
-
-    <div id="main-container">
+    <div id="main-contaner">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Selecione seu pedido:</h2>
-                    <form action="process/pizza.php" id="pizza-form" method="POST">
-                        <div class="form-group">
-                            <label for="borda">Borda:</label>
-                            <select name="borda" id="borda" class="form-control">
-                                <option value="">Selecione a borda da pizza</option>
-                                <?php foreach($bordas as $borda): ?>
-                                    <option value="<?= $borda['id'] ?>"><?= $borda['tipo'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="borda">Massa:</label>
-                            <select name="massa" id="massa" class="form-control">
-                                <option value="">Selecione a massa da pizza</option>
-                                <?php foreach($massas as $massa): ?>
-                                    <option value="<?= $massa['id'] ?>"><?= $massa['tipo'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="borda">Sabores: (máximo 3)</label>
-                            <select multiple name="sabores[]" id="sabores" class="form-control">
-                                <?php foreach($sabores as $sabor): ?>
-                                    <option value="<?= $sabor['id'] ?>"><?= $sabor['nome'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Fazer pedido">
-                        </div>
-                    </form>
+                    <h2>Gerenciar pedidos:</h2>
+                </div>
+                <div class="col-md-12 table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scopo="col"><span>Pedido</span> #</th>
+                                <th scopo="col">Borda</th>
+                                <th scopo="col">Massa</th>
+                                <th scopo="col">Sabores</th>
+                                <th scopo="col">Status</th>
+                                <th scopo="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1</td>
+                                <td>Cheddar</td>
+                                <td>Catupiry</td>
+                                <td>4 Queijos</td>
+                                <td>
+                                    <form action="process/orders.php" class="form-group update-form" method="POST">
+                                        <input type="hidden" name="type" value="update">
+                                        <input type="hidden" name="id" value="1">
+                                        <select name="status" class="form-control status-input">
+                                            <option value="">Entrega</option>
+                                        </select>
+                                        <button type="submit" class="update-btn">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="process/orders.php" method="POST">
+                                        <input type="hidden" name="type" value="delete">
+                                        <input type="hidden" name="id" value="1">
+                                        <button type="submit" class="delete-btn">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
