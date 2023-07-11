@@ -33,8 +33,38 @@
 
         } else {
 
-            echo "passou da validação";
-            exit;
+            $stmt = $conn->prepare("INSERT INTO pizzas (borda_id, massa_id) VALUES (:borda, :massa)
+            ");
+
+            $stmt->bindParam(":borda", $borda, PDO::PARAM_INT);
+            $stmt->bindParam(":massa", $massa, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            $pizzaId = $conn->lastInsertId();
+
+            $stmt = $conn->prepare("INSERT INTO pizza_sabor (pizza_id, sabor_id) VALUES (:pizza, :sabor)");
+
+            foreach($sabores as $sabor) {
+
+                $stmt->bindParam(":pizza", $pizzaId, PDO::PARAM_INT);
+                $stmt->bindParam(":sabor", $sabor, PDO::PARAM_INT);
+
+                $stmt->execute();
+            }
+
+            $stmt = $conn->prepare("INSERT INTO pedidos (pizza_id, status_id) VALUES (:pizza, :status)
+            ");
+
+            $statusId = 1;
+
+            $stmt->bindParam(":pizza", $pizzaId);
+            $stmt->bindParam(":status", $statusId);
+            
+            $stmt->execute();
+
+            $_SESSION["msg"] = "Pedido realizado com sucesso!";
+            $_SERVER["status"] = "success";
         }
 
         header("Location: .. ");
