@@ -6,7 +6,7 @@
 ?>
 
     <div id="main-contaner">
-        <div class="container">
+        <div class="container min-height-container">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Gerenciar pedidos:</h2>
