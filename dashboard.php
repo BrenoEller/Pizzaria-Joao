@@ -2,6 +2,7 @@
 
     include_once("templates/header.php");
     include_once("process/pizza.php");
+    include_once("process/orders.php");
 
 ?>
 
